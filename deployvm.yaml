@@ -1,0 +1,38 @@
+- hosts: 192.168.114.132
+  tasks:
+    - name: "DeployVM"
+      proxmox_kvm:
+        api_user    : root@pam
+        api_password: admin
+        api_host    : 192.168.114.132
+        name        : VMtest
+        node        : Proxmox
+        net         : '{"net0":"virtio,bridge=vmbr0,rate=200"}'
+        cores       : 4
+        vcpus       : 2
+        memory      : 2048
+        ide         : '{"ide0":"local:iso/ubuntu-18.04.1-live-server-amd64.iso,media=cdrom"}'
+        virtio      : '{"scsi0":"AllDisk:20,format=raw"}'
+        ostype      : l26  
+
+    - name: "DeployVM1"
+      proxmox_kvm:
+        api_user    : root@pam
+        api_password: admin
+        api_host    : 192.168.114.132
+        name        : VMtest
+        node        : Proxmox15-2
+        net         : '{"net0":"virtio,bridge=vmbr0,rate=200"}'
+        cores       : 4
+        vcpus       : 2
+
+    - name: "DeployVM2"
+      proxmox_kvm:
+        api_user    : root@pam
+        api_password: admin
+        api_host    : 192.168.114.132
+        name        : VMtest
+        node        : Proxmox15-3
+        net         : '{"net0":"virtio,bridge=vmbr0,rate=200"}'
+        cores       : 4
+        vcpus       : 2
