@@ -1,0 +1,38 @@
+
+- hosts: all
+  tasks:
+    - name: "DeployVM"
+      proxmox_kvm:
+        api_user    : root@pam
+        api_password: admin
+        api_host    : 192.168.114.132
+        name        : VMtest
+        node        : Proxmox
+        net         : '{"net0":"virtio,bridge=vmbr0,rate=200"}'
+        cores       : 2
+        vcpus       : 2
+        memory      : 2048
+        ide         : '{"ide0":"RepIso:iso/ubuntu-18.04.1-live-server-amd64.$
+        virtio      : '{"scsi0":"AllDisk:20,format=raw"}'
+        ostype      : l26
+
+
+    - name: "PowerOn"
+      proxmox_kvm:
+        api_user    : root@pam
+        api_password: admin
+        api_host    : 192.168.114.132
+        name        : VMtest
+        node        : Proxmox
+        state       : started
+
+
+    - name: "backup"
+      proxmox_kvm:
+        api_user    : root@pam
+        api_password: admin
+        api_host    : 192.168.114.132
+        name        : VMtest
+        node        : Proxmox
+        look        : snapshot
+
